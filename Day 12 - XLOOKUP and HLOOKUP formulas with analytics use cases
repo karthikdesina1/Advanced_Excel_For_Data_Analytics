@@ -1,0 +1,261 @@
+# 🔎 XLOOKUP & HLOOKUP for Data Analytics
+
+## Overview
+
+Lookup functions connect related information stored across tables, worksheets, or files.
+
+**Lookup Value → Find Match → Return Related Data → Validate → Analyze**
+
+This module focuses on **HLOOKUP, XLOOKUP, VLOOKUP comparison, error handling, match modes, multiple returns, and business applications.**
+
+---
+
+## 1. VLOOKUP Recap
+
+### Syntax
+
+```excel id="1c0khc"
+=VLOOKUP(lookup_value,table_array,col_index_num,[range_lookup])
+```
+
+### Exact Match
+
+```excel id="k9bd8h"
+=VLOOKUP(A2,$A$2:$D$100,3,FALSE)
+```
+
+`FALSE` or `0` requests an exact match.
+
+### Approximate Match
+
+```excel id="okv6ms"
+=VLOOKUP(A2,$A$2:$D$100,3,TRUE)
+```
+
+Approximate matching requires correctly structured/sorted lookup data.
+
+### Error Handling
+
+```excel id="wd75w3"
+=IFERROR(VLOOKUP(A2,$A$2:$D$100,3,FALSE),"Not Found")
+```
+
+Common errors:
+
+- `#N/A` → Match not found
+- `#REF!` → Invalid reference/index
+- `#VALUE!` → Invalid argument/data issue
+
+---
+
+# 2. HLOOKUP
+
+HLOOKUP searches across the **first row** and returns a value from another row.
+
+### Syntax
+
+```excel id="l4iv38"
+=HLOOKUP(lookup_value,table_array,row_index_num,[range_lookup])
+```
+
+### Example
+
+```excel id="3e0r84"
+=HLOOKUP("Mouse",$B$1:$E$3,2,FALSE)
+```
+
+Useful when data is arranged horizontally:
+
+| Product | Laptop | Mouse | Keyboard |
+|---|---:|---:|---:|
+| Price | 800 | 25 | 45 |
+| Stock | 50 | 150 | 100 |
+
+---
+
+# 3. XLOOKUP
+
+XLOOKUP separates the lookup range from the return range.
+
+### Syntax
+
+```excel id="pfj6s5"
+=XLOOKUP(lookup_value,lookup_array,return_array,
+[if_not_found],[match_mode],[search_mode])
+```
+
+### Basic Example
+
+```excel id="p95xlj"
+=XLOOKUP(A2,$A$2:$A$100,$C$2:$C$100)
+```
+
+Search column A and return the corresponding value from column C.
+
+---
+
+## 4. Built-In Error Handling
+
+Instead of:
+
+```excel id="b52x5c"
+=IFERROR(VLOOKUP(A2,$A$2:$D$100,3,FALSE),"Not Found")
+```
+
+XLOOKUP can use:
+
+```excel id="ij7fg6"
+=XLOOKUP(A2,$A$2:$A$100,$C$2:$C$100,"Not Found")
+```
+
+`[if_not_found]` provides a controlled result instead of `#N/A`.
+
+---
+
+# 5. XLOOKUP Match Modes
+
+| Mode | Meaning |
+|---:|---|
+| `0` | Exact match |
+| `-1` | Exact or next smaller |
+| `1` | Exact or next larger |
+| `2` | Wildcard |
+
+### Exact
+
+```excel id="2xaknj"
+=XLOOKUP(A2,A2:A100,C2:C100,"Not Found",0)
+```
+
+### Next Smaller
+
+```excel id="c1ln5d"
+=XLOOKUP(H2,B2:B10,C2:C10,"",-1)
+```
+
+### Next Larger
+
+```excel id="j5aq79"
+=XLOOKUP(H2,B2:B10,C2:C10,"",1)
+```
+
+### Wildcard
+
+```excel id="8akgvg"
+=XLOOKUP("*"&A2&"*",B2:B100,C2:C100,"Not Found",2)
+```
+
+---
+
+# 6. Search Modes
+
+| Mode | Search |
+|---:|---|
+| `1` | First → Last |
+| `-1` | Last → First |
+| `2` | Binary ascending |
+| `-2` | Binary descending |
+
+### Latest/Last Match
+
+```excel id="4kdlq3"
+=XLOOKUP(A2,A2:A100,D2:D100,"Not Found",0,-1)
+```
+
+This searches from the bottom upward.
+
+---
+
+# 7. Multiple Return Values
+
+XLOOKUP can return multiple adjacent columns.
+
+```excel id="x76j95"
+=XLOOKUP(A2,$A$2:$A$100,$B$2:$D$100,"Not Found")
+```
+
+One Employee ID could return:
+
+```text id="8fmyvj"
+Name | Department | City
+```
+
+Dynamic-array versions of Excel can spill these results automatically.
+
+---
+
+# 8. Commission Lookup
+
+Example commission structure:
+
+| Sales Threshold | Commission |
+|---:|---:|
+| 0 | 2% |
+| 10,001 | 5% |
+| 25,001 | 7% |
+| 50,001 | 10% |
+
+For a lower-bound threshold table sorted ascending:
+
+```excel id="fqkp61"
+=XLOOKUP(H2,$B$2:$B$5,$C$2:$C$5,"",-1)
+```
+
+This finds an exact threshold or the next smaller threshold.
+
+---
+
+# 9. VLOOKUP vs XLOOKUP
+
+| Feature | VLOOKUP | XLOOKUP |
+|---|---|---|
+| Search direction | Right only | Left/Right |
+| Column index | Required | Not required |
+| Built-in not-found result | No | Yes |
+| Multiple returns | Limited | Yes |
+| Search direction control | No | Yes |
+| Match modes | Basic | Advanced |
+
+---
+
+# 10. Filters + Lookups
+
+Filters help inspect subsets of data before or after lookup operations.
+
+Examples:
+
+**Region → East**  
+**Department → Sales**  
+**Product → Laptop**
+
+Filtering is especially useful for validating lookup results and investigating missing or inconsistent records.
+
+---
+
+## Business Applications
+
+```text id="97h1ma"
+Employee ID  → Name / Department / City
+Product ID   → Product / Category / Price
+Customer ID  → Segment / Region
+Order ID     → Status
+Sales Amount → Commission %
+```
+
+---
+
+## Key Takeaway
+
+Choosing a lookup starts with the structure of the data:
+
+**Horizontal structure → HLOOKUP**
+
+**Traditional vertical lookup → VLOOKUP**
+
+**Flexible modern retrieval → XLOOKUP**
+
+The important analytical question is:
+
+> What uniquely identifies the record, and what related information needs to be returned?
+
+**Find → Match → Retrieve → Validate → Analyze**
