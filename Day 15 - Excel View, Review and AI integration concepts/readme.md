@@ -46,7 +46,7 @@ A sales analyst manages a workbook containing 50,000 transaction records.
 
 ---
 
-## 2. 🔍 REVIEW — Accuracy & Collaboration
+## 2. 🔍 REVIEW - Accuracy & Collaboration
 
 The Review tab provides tools for checking, documenting, and protecting workbook information.
 
