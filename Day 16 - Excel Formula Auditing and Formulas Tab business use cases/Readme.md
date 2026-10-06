@@ -1,4 +1,4 @@
-# 📊 Excel Formulas Tab — Formula Auditing in Business
+# 📊 Excel Formulas Tab - Formula Auditing in Business
 
 ## 📌 Overview
 
