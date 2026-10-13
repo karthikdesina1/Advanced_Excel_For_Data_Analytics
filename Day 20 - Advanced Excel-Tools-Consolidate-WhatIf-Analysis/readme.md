@@ -1,4 +1,4 @@
-# 📊 Excel Data Tab — Consolidate, Relationships & What-If Analysis
+# 📊 Excel Data Tab - Consolidate, Relationships & What-If Analysis
 
 ## 📌 Overview
 
@@ -14,7 +14,7 @@ This module focuses on:
 
 ---
 
-## 1. Consolidate — Data Tools
+## 1. Consolidate - Data Tools
 
 Consolidate combines and summarizes data from multiple worksheets or workbooks.
 
@@ -53,7 +53,7 @@ Use when source data contains matching row or column labels, even if the layout 
 
 ---
 
-## 2. Relationships — Excel Data Model
+## 2. Relationships - Excel Data Model
 
 Relationships connect multiple tables using common fields.
 
@@ -110,7 +110,7 @@ Customer Table (1)
 
 ---
 
-## 3. What-If Analysis — Goal Seek
+## 3. What-If Analysis - Goal Seek
 
 Goal Seek determines the input required to achieve a specified formula result.
 
